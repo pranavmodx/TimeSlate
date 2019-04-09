@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>WatchMyTime</title>
+  <link rel="stylesheet" href="../css/bootstrap.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <div class="page-header text-center">
+    <h1>WatchMyTime</h1>
+    <a href="../html/graph.html" class="link-to-graphs">Check graphs</a>
+  </div>
+  <br>
+  <div class="container text-center">
+    <h2 id="main-timer">00:00:00</h2>
+    <div class="btn-group"></div>
+    <button type="button" id="start-btn" class="btn btn-primary">Start</button>
+    <button type="button" id="stop-btn" class="btn btn-primary">Stop</button>
+    <button type="button" id="reset-btn" class="btn btn-primary">Reset</button>
+    <br><br>
+  </div>
+
+  <div id="windows", class="container text-center">
+    <ul id="list" class="list-group">
+
+    </ul>
+  </div>
+  
+  <script src="../js/timer.js"></script>
+  <script src="../js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+{
+  "name": "watchmytime",
+  "version": "1.0.0",
+  "description": "time tracking app ",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "pranavmodx",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^4.1.1"
+  }
+}
