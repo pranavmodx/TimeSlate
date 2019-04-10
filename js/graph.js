@@ -1,8 +1,8 @@
-let history = [{"appName": 'Chrome', "usageTime": 15}, {"appName": 'Firefox', "usageTime": 10}, {"appName": 'Opera', "usageTime": 20}];
+let history2 = [{"appName": 'Chrome', "usageTime": 15}, {"appName": 'Firefox', "usageTime": 10}, {"appName": 'Opera', "usageTime": 20}];
 
 let pcent = [];
 for (let i=0; i<3; i++)
-    pcent.push(history[i].usageTime);
+    pcent.push(history2[i].usageTime);
 console.log(pcent);
 
 let width = 300,
@@ -12,7 +12,7 @@ let width = 300,
 let color = d3.scaleOrdinal().range(["#2C93E8","#838690","#F56C4E"]);
     
 let pie = d3.pie()
-    .value(d => d.usageTime)(history);
+    .value(d => d.usageTime)(history2);
 
 let arc = d3.arc()
 	.outerRadius(radius - 10)

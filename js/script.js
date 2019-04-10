@@ -90,5 +90,5 @@ function displayActiveWin() {
     });
 
     // console.log(history);
-    displayFuncID = setInterval(call, 5000);
+    displayFuncID = setInterval(call, 1000);
 }
