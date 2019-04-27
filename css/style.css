@@ -1,30 +1,31 @@
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 li {
-    text-decoration: none;
+  text-decoration: none;
 }
 li:hover {
-    background-color: lightgrey;
+  background-color: lightskyblue;
 }
-body, html {
-    background-color: skyblue;
+body,
+html {
+  background-color: skyblue;
 }
 /* Style the tab */
 /* .tab {
     overflow: hidden; */
-    /* border: 1px solid #ccc; */
-    /* background-color: #f1f1f1;
+/* border: 1px solid #ccc; */
+/* background-color: #f1f1f1;
 } */
-  
-  /* Style the buttons that are used to open the tab content */
+
+/* Style the buttons that are used to open the tab content */
 .tab button {
-    /* background-color: inherit; */
-    /* border: none; */
-    /* outline: none; */
-    cursor: pointer;
-    padding: 14px 16px;
-    transition: 0.3s;
+  /* background-color: inherit; */
+  /* border: none; */
+  /* outline: none; */
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
 }
 
 /* Change background color of buttons on hover */
@@ -39,8 +40,8 @@ body, html {
 
 /* Style the tab content */
 .tabcontent {
-    display: none;
-    padding-top: 50px;
-    /* border: 1px solid #ccc;  */
-    /* border-top: none; */
+  display: none;
+  padding-top: 50px;
+  /* border: 1px solid #ccc;  */
+  /* border-top: none; */
 }

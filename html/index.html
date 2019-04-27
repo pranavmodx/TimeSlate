@@ -1,51 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>watchMyTime</title>
-  <link rel="stylesheet" href="../css/bootstrap.min.css">
-  <link rel="stylesheet" href="../css/style.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.2/d3.min.js"></script>
-</head>
-<body>
-  <div class="page-header text-center">
-    <h1>Watch My Time</h1>
-  </div>
-  <br>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>watchMyTime</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../css/style.css" />
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.9.2/d3.min.js"></script> -->
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+  </head>
+  <body>
+    <div class="text-center">
+      <h1>Watch My Time</h1>
+      <br /><br /><br />
+    </div>
+    <br />
 
-  <div class="tab text-center">
-    <button id="defaultOpen" class="btn btn-primary tablinks" onclick="openTab(event, 'tab-1')">Home</button>
-    <button class="btn btn-primary tablinks" onclick="openTab(event, 'tab-2')">Report</button>
-  </div>
+    <div class="tab text-center">
+      <button
+        id="defaultOpen"
+        class="btn btn-primary tablinks"
+        onclick="openTab(event, 'tab-1')"
+      >
+        Home
+      </button>
+      <button
+        class="btn btn-primary tablinks active"
+        onclick="openTab(event, 'tab-2')"
+      >
+        Report
+      </button>
+    </div>
 
-  <div id="tab-1" class="tabcontent">
-    <div class="container text-center">
-      <h2 id="main-timer">00:00:00</h2>
-      <div class="btn-group">
-        <button type="button" id="start-btn" class="btn btn-primary">Start</button>
-        <button type="button" id="stop-btn" class="btn btn-primary">Stop</button>
-        <button type="button" id="reset-btn" class="btn btn-primary">Reset</button>
+    <div id="tab-1" class="tabcontent">
+      <div class="container text-center">
+        <h2 id="main-timer">00:00:00</h2>
+        <div class="btn-group">
+          <button type="button" id="start-btn" class="btn btn-primary">
+            Start
+          </button>
+          <button type="button" id="stop-btn" class="btn btn-primary">
+            Stop
+          </button>
+          <button type="button" id="reset-btn" class="btn btn-primary">
+            Reset
+          </button>
+        </div>
+      </div>
+      <br /><br />
+      <div id="windows" , class="container text-center">
+        <ul id="list" class="list-group list-group-flush"></ul>
       </div>
     </div>
-    <br><br>
-    <div id="windows", class="container text-center">
-      <ul id="list" class="list-group"></ul>
-    </div>
-  </div>
 
-  <div id="tab-2" class="tabcontent">
-    <div class="text-center">
-    <p>Graphs</p>
-    <br>
-    <div id="pie"></div>
+    <div id="tab-2" class="tabcontent">
+      <div class="text-center">
+        <p>Graphs</p>
+        <br />
+        <div id="pie"></div>
+        <br /><br />
+        <button type="button" id="render-btn" class="btn btn-primary">
+          Stop Rendering
+        </button>
+      </div>
     </div>
-  </div>
-  
-  <script src="../js/tabs.js"></script>
-  <script src="../js/timer.js"></script>
-  <script src="../js/script.js"></script>
-  <script src="../js/graph.js"></script>
-</body>
+
+    <script src="../js/tabs.js"></script>
+    <script src="../js/timer.js"></script>
+    <script src="../js/script.js"></script>
+    <script src="../js/graph3.js"></script>
+  </body>
 </html>
