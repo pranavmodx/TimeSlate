@@ -9,6 +9,7 @@ let iter = 0,
   history = [],
   //   graphData = [],
   outputHTML = "",
+  counterDict = {},
   usageTime = 0;
 
 const startBtn = document.getElementById("start-btn"),
@@ -76,6 +77,8 @@ stopBtn.addEventListener("click", () => {
 resetBtn.addEventListener("click", () => {
   //   console.log("Reset button clicked!");
   resetBtn.disabled = true;
+  stopBtn.disabled = true;
+  startBtn.disabled = false;
   funcClearInterval();
   clear("main-timer");
   ulElem.innerHTML = "";
@@ -100,7 +103,8 @@ function displayActiveWin() {
 
       outputHTML = `<li class="list-group-item list-group-item-info">Window Title : ${appWinTitle}</li>
                           <li class="list-group-item list-group-item-info">Application Name : ${appName}</li>
-                          <li class="list-group-item list-group-item-info" id="${appName}">00:00:00</li><br><br>`;
+                          <li class="list-group-item list-group-item-info" id="${appName}">00:00:00</li>
+                          <h6>Times Opened <span id="span-${appName}" class="badge">${1}</span></h6><br><br>`;
 
       ulElem.innerHTML = outputHTML;
 
@@ -117,7 +121,8 @@ function displayActiveWin() {
       //   if (document.getElementById(`${appName}`) !== undefined) {
       outputHTML = `<li class="list-group-item list-group-item-info">Window Title : ${appWinTitle}</li>
                         <li class="list-group-item list-group-item-info">Application Name : ${appName}</li>
-                        <li class="list-group-item list-group-item-info" id="${appName}">00:00:00</li><br><br>`;
+                        <li class="list-group-item list-group-item-info" id="${appName}">00:00:00</li>
+                        <h6>Times Opened <span id="span-${appName}" class="badge">${1}</span></h6><br><br>`;
       //   }
 
       //   console.log(outputHTML);
@@ -144,9 +149,12 @@ function displayActiveWin() {
       // console.log(`aName3 : ${aName3}`);
       addTimerID = setInterval(() => add(`${aName3}`), 1000);
       history.push(appName);
+      let badge = document.getElementById(`span-${appName}`);
+      let badgeNum = Number(badge.innerHTML);
+      badge.innerHTML = badgeNum + 1;
     }
     iter++;
-    console.log(history);
+    // console.log(history);
   };
 
   displayFuncID = setInterval(call, 3000);
