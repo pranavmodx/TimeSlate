@@ -1,12 +1,55 @@
-// var keys = [];
+let keys = [...history];
 
-appKeys = [
-  "Unknown",
-  "Black or African American",
-  "American Indian or Alaska Native",
-  "Asian",
-  "Native Hawaiian or Other Pacific Islander"
-];
+let gRenderBtn = document.getElementById("Gstart-btn"),
+  gStopBtn = document.getElementById("Gstop-btn"),
+  gResetBtn = document.getElementById("Greset-btn");
+
+gRenderBtn.disabled = true;
+
+gStopBtn.addEventListener("click", () => {
+  gStopBtn.disabled = true;
+  gRenderBtn.disabled = false;
+  clearInterval(gInter);
+});
+
+gRenderBtn.addEventListener("click", () => {
+  gRenderBtn.disabled = true;
+  gStopBtn.disabled = false;
+});
+
+gResetBtn.addEventListener("click", () => {
+  gRenderBtn.disabled = false;
+  gStopBtn.disabled = true;
+  keys = [];
+  ob = {};
+  data = [];
+  let element = document.getElementById("pie");
+  element.parentNode.removeChild(element);
+  let newElement = document.createElement("div");
+  newElement.setAttribute("id", "pie");
+});
+
+document.getElementById("start-btn").addEventListener("click", () => {
+  gInter = setInterval(() => {
+    keys = [...history];
+    update(makeData(data));
+    // console.log(keys);
+    // console.log(history);
+  }, 2000);
+});
+
+// Causing trouble -> graph fails to load when below code is uncommented
+
+// document.getElementById("Grender-btn").addEventListener("click", () => {
+//   gInter = setInterval(() => {
+//     keys = [...history];
+//     update(makeData(data));
+//     // console.log(keys);
+//     // console.log(history);
+//   }, 2000);
+// });
+
+var data = Array();
 
 var width = 250,
   height = 250,
@@ -46,14 +89,17 @@ var key = function(d) {
 //var color = d3.scaleOrdinal(d3.schemeCategory10)
 var color = d3.scaleOrdinal(d3.schemePastel1);
 //.domain(["Assigned", "Complete", "Overdue", "Terminated", "Awaiting Review", "Attached"])
-//   .domain(keys);
+// .domain(keys);
 //.range(["#1abc9c", "#27ae60", "#e74c3c", "#f1c40f", "#34495e", "#3498db", "#8e44ad"]);
 
-update(makeData());
-
-var inter = setInterval(function() {
-  update(makeData());
-}, 2000);
+// update(makeData());
+let renderBtn = document.getElementById("render-btn");
+renderBtn.addEventListener("click", () => {
+  var inter = setInterval(function() {
+    //var keys = history;
+    update(makeData(data));
+  }, 2000);
+});
 
 function mergeWithFirstEqualZero(first, second) {
   var secondSet = d3.set();
@@ -76,23 +122,44 @@ function mergeWithFirstEqualZero(first, second) {
 
   return sortedMerge;
 }
-// var jjj = 0;
-function makeData() {
-  var data = Array();
-  let keys = Object.keys(history);
 
-  for (i = 0; i < keys.length; i++) {
-    // if (Math.random() < 0.7) {
-    var ob = {};
-    ob["label"] = keys[i];
-    // ob["value"] = randomCount(1, 100);
-    ob["value"] = Number(document.getElementById(`${keys[i]}`).innerHTML);
-    console.log(document.getElementById(`${keys[i]}`));
-    data.push(ob);
-    // }
-    // jjj++;
-    // keys.push(appKeys[jjj]);
+function makeData(data) {
+  // var data = Array();
+  //var keys = [...history];
+
+  let hTag = document.getElementById(`${keys[keys.length - 1]}`);
+  let [hours, minutes, seconds] = hTag.innerHTML.split(":");
+  hours = Number(hours);
+  minutes = Number(minutes);
+  seconds = Number(seconds);
+  // console.log(seconds);
+  let usageTime = hours * 60 + minutes * 60 + seconds;
+  // console.log(usageTime);
+  var ob = {};
+  // console.log(keys);
+  ob["label"] = keys[keys.length - 1];
+  ob["value"] = usageTime;
+
+  function findObjectByKey(array, key, value) {
+    for (var i = 0; i < array.length; i++) {
+      if (array[i][key] === value) {
+        return i;
+      }
+    }
+    return null;
   }
+
+  var idx = findObjectByKey(data, "label", keys[keys.length - 1]);
+  // console.log("Index : ", idx);
+  if (idx !== null) {
+    data[idx] = ob;
+  } else {
+    data.push(ob);
+  }
+
+  // Update 'data' array as follows :
+  // 1. If 'ob' already present in 'data', then replace
+  // 2. If not, push
 
   var sortedData = data.sort(function(a, b) {
     return d3.ascending(a.label, b.label);
@@ -101,9 +168,9 @@ function makeData() {
   return sortedData;
 }
 
-// function randomCount(min, max) {
-//   return Math.floor(Math.random() * (max - min + 1)) + min;
-// }
+function randomCount(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 
 function update(data) {
   var duration = 500;

@@ -5,12 +5,8 @@ let iter = 0,
   displayFuncID,
   addTimerID,
   mainTimerWatch,
-  // history = [{"appName": 'Chrome', "usageTime": 15}, {"appName": 'Firefox', "usageTime": 10}, {"appName": 'Opera', "usageTime": 20}],
   history = [],
-  //   graphData = [],
-  outputHTML = "",
-  counterDict = {},
-  usageTime = 0;
+  outputHTML = "";
 
 const startBtn = document.getElementById("start-btn"),
   stopBtn = document.getElementById("stop-btn"),
@@ -104,7 +100,7 @@ function displayActiveWin() {
       outputHTML = `<li class="list-group-item list-group-item-info">Window Title : ${appWinTitle}</li>
                           <li class="list-group-item list-group-item-info">Application Name : ${appName}</li>
                           <li class="list-group-item list-group-item-info" id="${appName}">00:00:00</li>
-                          <h6>Times Opened <span id="span-${appName}" class="badge">${1}</span></h6><br><br>`;
+                          <h6 style="color: white">Times Opened <span id="span-${appName}" class="badge">${1}</span></h6><br><br>`;
 
       ulElem.innerHTML = outputHTML;
 
@@ -112,6 +108,7 @@ function displayActiveWin() {
       // console.log(`aName1 : ${aName1}`);
       addTimerID = setInterval(() => add(`${aName1}`), 1000);
       history.push(appName);
+      grHistory.push(appName);
       //   graphData.push({ [appName]: 1 });
     } else if (!history.includes(appName)) {
       //   console.log("history doesn't include this app");
@@ -122,7 +119,7 @@ function displayActiveWin() {
       outputHTML = `<li class="list-group-item list-group-item-info">Window Title : ${appWinTitle}</li>
                         <li class="list-group-item list-group-item-info">Application Name : ${appName}</li>
                         <li class="list-group-item list-group-item-info" id="${appName}">00:00:00</li>
-                        <h6>Times Opened <span id="span-${appName}" class="badge">${1}</span></h6><br><br>`;
+                        <h6 style="color: white">Times Opened <span id="span-${appName}" class="badge">${1}</span></h6><br><br>`;
       //   }
 
       //   console.log(outputHTML);
@@ -135,6 +132,7 @@ function displayActiveWin() {
       // console.log(`aName2 : ${aName2}`);
       addTimerID = setInterval(() => add(`${aName2}`), 1000);
       history.push(appName);
+      grHistory.push(appName);
       //   graphData.push({ [appName]: usageTime });
     } else if (
       history.includes(appName) &&
@@ -157,5 +155,5 @@ function displayActiveWin() {
     // console.log(history);
   };
 
-  displayFuncID = setInterval(call, 3000);
+  displayFuncID = setInterval(call, 2000);
 }
