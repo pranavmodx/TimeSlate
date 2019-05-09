@@ -1,4 +1,4 @@
-function add(idName) {
+function addTimer(idName) {
   let hTag = document.getElementById(`${idName}`);
   let [hours, minutes, seconds] = hTag.innerHTML.split(":");
   hours = Number(hours);
@@ -21,8 +21,9 @@ function add(idName) {
     (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") +
     ":" +
     (seconds > 9 ? seconds : "0" + seconds);
+}
 
-function clear(tagId) {
+function clearTimer(tagId) {
   document.getElementById(tagId).textContent = "00:00:00";
   seconds = 0;
   minutes = 0;

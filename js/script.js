@@ -36,17 +36,17 @@ function resume() {
 
     if (!history.includes(appName)) {
       clearInterval(addTimerID);
-      addTimerID = setInterval(() => add(`${appName}`), 1000);
+      addTimerID = setInterval(() => addTimer(`${appName}`), 1000);
       history.push(appName);
     } else {
       clearInterval(addTimerID);
-      addTimerID = setInterval(() => add(`${appName}`), 1000);
+      addTimerID = setInterval(() => addTimer(`${appName}`), 1000);
       history.push(appName);
     }
   };
   displayFuncID = setInterval(call, 1000);
   setTimeout(() => {
-    mainTimerWatch = setInterval(() => add("main-timer"), 1000);
+    mainTimerWatch = setInterval(() => addTimer("main-timer"), 1000);
   }, 1000);
 }
 
@@ -67,7 +67,7 @@ resetBtn.addEventListener("click", () => {
   stopBtn.disabled = true;
   startBtn.disabled = false;
   funcClearInterval();
-  clear("main-timer");
+  clearTimer("main-timer");
   ulElem.innerHTML = "";
   iter = 0;
   history = [];
@@ -81,7 +81,7 @@ function displayActiveWin() {
     let appName = winDetails.owner.path.split("/")[2].split(".")[0];
 
     if (iter === 0) {
-      mainTimerWatch = setInterval(() => add("main-timer"), 1000);
+      mainTimerWatch = setInterval(() => addTimer("main-timer"), 1000);
 
       outputHTML = `<li class="list-group-item list-group-item-info">Window                  Title : ${appWinTitle}
                     </li>
@@ -95,7 +95,7 @@ function displayActiveWin() {
 
       ulElem.innerHTML = outputHTML;
 
-      addTimerID = setInterval(() => add(`${appName}`), 1000);
+      addTimerID = setInterval(() => addTimer(`${appName}`), 1000);
       history.push(appName);
     } else if (!history.includes(appName)) {
       clearInterval(addTimerID);
@@ -111,17 +111,14 @@ function displayActiveWin() {
                     <br><br>`;
 
       ulElem.innerHTML += outputHTML;
-
-      let aName2 = appName;
-      addTimerID = setInterval(() => add(`${appName}`), 1000);
+      addTimerID = setInterval(() => addTimer(`${appName}`), 1000);
       history.push(appName);
     } else if (
       history.includes(appName) &&
       appName != history[history.length - 1]
     ) {
       clearInterval(addTimerID);
-      let aName3 = appName;
-      addTimerID = setInterval(() => add(`${appName}`), 1000);
+      addTimerID = setInterval(() => addTimer(`${appName}`), 1000);
       history.push(appName);
       let badge = document.getElementById(`span-${appName}`);
       let badgeNum = Number(badge.innerHTML);
