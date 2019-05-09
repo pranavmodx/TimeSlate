@@ -15,6 +15,50 @@ gStopBtn.addEventListener("click", () => {
 gRenderBtn.addEventListener("click", () => {
   gRenderBtn.disabled = true;
   gStopBtn.disabled = false;
+
+  var data = Array();
+
+  var width = 250,
+    height = 250,
+    radius = Math.min(width, height) / 2;
+
+  var svg = d3
+    .select("#pie")
+    .append("svg")
+    .attr("width", width)
+    .attr("height", height)
+    .append("g")
+    .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+  svg.append("g").attr("class", "slices");
+
+  var pie = d3
+    .pie()
+    .sort(null)
+    .value(function(d) {
+      return d.value;
+    });
+
+  var arc = d3
+    .arc()
+    .outerRadius(radius * 1.0)
+    .innerRadius(radius * 0.0);
+
+  var outerArc = d3
+    .arc()
+    .innerRadius(radius * 0.5)
+    .outerRadius(radius * 1);
+
+  var key = function(d) {
+    return d.data.label;
+  };
+
+  var color = d3.scaleOrdinal(d3.schemePastel1);
+
+  gInter = setInterval(() => {
+    keys = [...history];
+    update(makeData(data));
+  }, 2000);
 });
 
 gResetBtn.addEventListener("click", () => {
@@ -23,31 +67,16 @@ gResetBtn.addEventListener("click", () => {
   keys = [];
   ob = {};
   data = [];
-  let element = document.getElementById("pie");
-  element.parentNode.removeChild(element);
-  let newElement = document.createElement("div");
-  newElement.setAttribute("id", "pie");
+  clearInterval(gInter);
+  svg.selectAll("*").remove();
 });
 
 document.getElementById("start-btn").addEventListener("click", () => {
   gInter = setInterval(() => {
     keys = [...history];
     update(makeData(data));
-    // console.log(keys);
-    // console.log(history);
   }, 2000);
 });
-
-// Causing trouble -> graph fails to load when below code is uncommented
-
-// document.getElementById("Grender-btn").addEventListener("click", () => {
-//   gInter = setInterval(() => {
-//     keys = [...history];
-//     update(makeData(data));
-//     // console.log(keys);
-//     // console.log(history);
-//   }, 2000);
-// });
 
 var data = Array();
 
@@ -86,17 +115,11 @@ var key = function(d) {
   return d.data.label;
 };
 
-//var color = d3.scaleOrdinal(d3.schemeCategory10)
 var color = d3.scaleOrdinal(d3.schemePastel1);
-//.domain(["Assigned", "Complete", "Overdue", "Terminated", "Awaiting Review", "Attached"])
-// .domain(keys);
-//.range(["#1abc9c", "#27ae60", "#e74c3c", "#f1c40f", "#34495e", "#3498db", "#8e44ad"]);
 
-// update(makeData());
 let renderBtn = document.getElementById("render-btn");
 renderBtn.addEventListener("click", () => {
   var inter = setInterval(function() {
-    //var keys = history;
     update(makeData(data));
   }, 2000);
 });
@@ -124,19 +147,13 @@ function mergeWithFirstEqualZero(first, second) {
 }
 
 function makeData(data) {
-  // var data = Array();
-  //var keys = [...history];
-
   let hTag = document.getElementById(`${keys[keys.length - 1]}`);
   let [hours, minutes, seconds] = hTag.innerHTML.split(":");
   hours = Number(hours);
   minutes = Number(minutes);
   seconds = Number(seconds);
-  // console.log(seconds);
   let usageTime = hours * 60 + minutes * 60 + seconds;
-  // console.log(usageTime);
   var ob = {};
-  // console.log(keys);
   ob["label"] = keys[keys.length - 1];
   ob["value"] = usageTime;
 
@@ -150,26 +167,16 @@ function makeData(data) {
   }
 
   var idx = findObjectByKey(data, "label", keys[keys.length - 1]);
-  // console.log("Index : ", idx);
   if (idx !== null) {
     data[idx] = ob;
   } else {
     data.push(ob);
   }
-
-  // Update 'data' array as follows :
-  // 1. If 'ob' already present in 'data', then replace
-  // 2. If not, push
-
   var sortedData = data.sort(function(a, b) {
     return d3.ascending(a.label, b.label);
   });
 
   return sortedData;
-}
-
-function randomCount(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 function update(data) {
