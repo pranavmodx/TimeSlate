@@ -9,7 +9,7 @@
   "author": "pranavmodx",
   "license": "MIT",
   "devDependencies": {
-    "electron": "^4.1.1"
+    "electron": "^7.2.4"
   },
   "dependencies": {
     "active-win": "^5.0.0"
